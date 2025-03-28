@@ -1,13 +1,7 @@
 <?php
-// start the session
-session_start();
-
-// Check if the user is not logged in, then redirect the user to login page
-if (!isset($_SESSION["userid"]) || empty($_SESSION["userid"])) {
-    header("location: login.php");
-    exit;
-}
+require_once "session.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +14,7 @@ if (!isset($_SESSION["userid"]) || empty($_SESSION["userid"])) {
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Hello, <strong><?php echo $_SESSION['name']; ?></strong>. Welcome to demo site.</h1>
+            <h1>Hello, <strong><?php echo $_SESSION['name']; ?></strong>. Welcome to Twitterity.</h1>
         </div>
         <p>
             <a href="logout.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Log Out</a>
@@ -28,7 +22,11 @@ if (!isset($_SESSION["userid"]) || empty($_SESSION["userid"])) {
     </div>
 </div>
 
-<a href="post_create.php">Create post</a>
+<!-- тут можна створити навігацію, щоб переглядати пости всіх інших юзерів-->
+<a href="view.php">View Records</a><br>
+<p><a href="insert.php">Insert New Record</a></p>
+<a href="post_create.php">Create post</a><br>
+<a href="flex.php">Flex</a><br>
 
 
 <h2>Мої пости</h2>
