@@ -1,99 +1,458 @@
-/*body {*/
-/*    font-family:Arial, Sans-Serif;*/
-/*}*/
-/*.clearfix:before, .clearfix:after{*/
-/*    content: "";*/
-/*    display: table;*/
-/*}*/
-/*.clearfix:after{*/
-/*    clear: both;*/
-/*}*/
-/*a{*/
-/*    color:#0067ab;*/
-/*    text-decoration:none;*/
-/*}*/
-/*a:hover{*/
-/*    text-decoration:underline;*/
-/*}*/
-/*.form{*/
-/*    width: 300px;*/
-/*    margin: 0 auto;*/
-/*}*/
-/*input[type='text'], input[type='email'],*/
-/*input[type='password'] {*/
-/*    width: 200px;*/
-/*    border-radius: 2px;*/
-/*    border: 1px solid #CCC;*/
-/*    padding: 10px;*/
-/*    color: #333;*/
-/*    font-size: 14px;*/
-/*    margin-top: 10px;*/
-/*}*/
-/*input[type='submit']{*/
-/*    padding: 10px 25px 8px;*/
-/*    color: #fff;*/
-/*    background-color: #0067ab;*/
-/*    text-shadow: rgba(0,0,0,0.24) 0 1px 0;*/
-/*    font-size: 16px;*/
-/*    box-shadow: rgba(255,255,255,0.24) 0 2px 0 0 inset,#fff 0 1px 0 0;*/
-/*    border: 1px solid #0164a5;*/
-/*    border-radius: 2px;*/
-/*    margin-top: 10px;*/
-/*    cursor:pointer;*/
-/*}*/
-/*input[type='submit']:hover {*/
-/*    background-color: #024978;*/
-/*}*/
-.body {
-    background: gray;
+/*****************************************************************/
+/*register*/
+
+.container-register {
+    display: flex;
+    justify-content: center; /* Центрування по горизонталі */
+    align-items: center;     /* Центрування по вертикалі */
+    height: 100vh;           /* Висота контейнера = висота вікна */
+    background-color: black;
+}
+
+.register-window {
+    padding: 10px;
+    width: 50em;
+}
+
+.logo-welcome {
+    font-family: jaro, sans-serif;
+    color: #ffd700;
+    text-transform: uppercase;
+    font-size: 50px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.register-form {
+    padding: 10px 50px;
+    border: gold solid 1px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-family: Roboto, sans-serif;
+    background: #1e1e1e;
+}
+
+.form-control {
+    display: block;
+    width: 95%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-register {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: grey;
+}
+
+.register-form a {
+    color: gold;
+    text-decoration: none;
+}
+
+.register-form a:hover {
+    text-decoration: underline;
+}
+
+/*****************************************************************/
+/*login*/
+
+.container-login {
+    display: flex;
+    justify-content: center; /* Центрування по горизонталі */
+    align-items: center;     /* Центрування по вертикалі */
+    height: 100vh;           /* Висота контейнера = висота вікна */
+    background-color: black;
+}
+
+.login-window {
+    padding: 10px;
+    width: 50em;
+}
+
+.logo-welcome {
+    font-family: jaro, sans-serif;
+    color: #ffd700;
+    text-transform: uppercase;
+    font-size: 50px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.login-form {
+    padding: 10px 50px;
+    border: gold solid 1px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-family: Roboto, sans-serif;
+    background: #1e1e1e;
+}
+
+.btn-login {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: grey;
+}
+
+.login-form a {
+    color: gold;
+    text-decoration: none;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+/*****************************************************************/
+/*homepage/allPosts*/
+
+html {
+    font-family: Roboto, sans-serif;
+}
+
+body {
+    margin: 0;
 }
 
 .wrapper {
     display: flex;
-    flex-flow: row wrap;
-    font-weight: bold;
-    text-align: center;
+    flex-flow: row nowrap;
+    /*text-align: center;*/
+    height: 100vh;
 }
 
 .wrapper > * {
     padding: 10px;
-    flex: 1 100%;
-}
-
-.header {
-    flex-direction: column;
-    background: tomato;
-}
-
-.footer {
-    background: lightgreen;
-}
-
-.main {
-    text-align: left;
-    background: deepskyblue;
+    flex: 1;
 }
 
 .aside-1 {
-    background: gold;
+    background: black;
+}
+
+.main {
+    background: #1e1e1e;
+    padding: 0;
 }
 
 .aside-2 {
-    background: hotpink;
+    background: black;
 }
 
 @media all and (min-width: 600px) {
-    .aside { flex: 1 0 0; }
+    .aside-1 { flex: 1 1 0; }
+    .aside-2 { flex: 1 1 0; }
 }
 
 @media all and (min-width: 800px) {
-    .main    { flex: 3 0px; }
+    .main    { flex: 2 1 0; }
     .aside-1 { order: 1; }
     .main    { order: 2; }
     .aside-2 { order: 3; }
-    .footer  { order: 4; }
 }
 
-body {
-    padding: 2em;
+/*****************************************************************/
+/*aside left*/
+
+.aside-1-1 {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
 }
+
+.header {
+    position: relative;
+    /*margin-left: auto;*/
+    padding: 10px 10px;
+}
+
+/* Підключення шрифту Mosk */
+@font-face {
+    font-family: 'Azonix';
+    src: url('fonts/AzonixRegular.woff2') format('woff2'),
+    url('fonts/AzonixRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.logo {
+    font-family: jaro, sans-serif;
+    color: #ffd700;
+    text-transform: uppercase;
+    font-size: 50px;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px #ffd700 solid;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.navbar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar i {
+    font-size: 24px;
+}
+
+.navbar a:hover {
+    border-radius: 25px;
+    background: #3c3c3c;
+}
+
+.crtpost {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.crtpost button {
+    display: block;
+    width:  100%;
+    font-size: 20px;
+    font-family: tim;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    background: white;
+    border-radius: 15px;
+}
+
+.logout {
+    background: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 20px;
+}
+
+.logout a {
+    color: black;
+    text-decoration: none;
+}
+
+/*****************************************************************/
+
+
+.welcome {
+    text-transform: initial;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px 10px;
+    border-bottom: 1px solid #ffd700;
+    color: #ffd700;
+    margin: 10px;
+}
+
+.no-posts {
+    text-align: center;
+    color: grey;
+    font-size: 25px;
+}
+
+/********** windowCreatePost **************************************/
+
+.wcp {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wcpContent {
+    background-color: black;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+}
+
+.crtpostTxtArea {
+    width: 95%;
+    height: 100px;
+    resize: none;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #1e1e1e;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+}
+
+.crtpostBtn {
+    /*background: rgb(239, 243, 244);*/
+    font-size: 20px;
+    border-radius: 10px;
+    background: white;
+    border: 2px;
+    cursor: pointer;
+}
+
+.postlist {
+    /*border: 2px solid green;*/
+}
+
+
+/*****************************************************************/
+/*vievpost*/
+
+.post-actions {
+    color: white;
+}
+
+.vievpostitem {
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
+
+.btn-edit {
+    float: right;
+    padding: 1px 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: grey;
+}
+
+.btn-delete {
+    float: right;
+    padding: 1px 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: grey;
+}
+
+/*********************** windowEditPost **************************/
+
+.wep {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wepContent {
+    background-color: black;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.wepContent h1{
+    color: white;
+}
+
+.editPostTxtArea {
+    width: 95%;
+    height: 100px;
+    resize: none;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #1e1e1e;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+}
+
+.wep-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.editPostBtn {
+    padding: 8px 16px;
+    font-size: 20px;
+    border-radius: 10px;
+    background: grey;
+    border: 2px;
+    cursor: pointer;
+}
+
+#saveButton {
+    background-color: #28a745;
+    color: white;
+}
+
+#cancelButton {
+    background-color: #dc3545;
+    color: white;
+}
+

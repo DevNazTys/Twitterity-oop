@@ -1,8 +1,10 @@
 <?php
-
+session_start();
 require_once "config.php";
-require_once "session.php";
-
+if (isset($_SESSION["userid"]) && $_SESSION["userid"] === true) {
+    header("location: homepage.php");
+    exit;
+}
 
 $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
@@ -12,12 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     // validate if email is empty
     if (empty($email)) {
-        $error .= '<p class="error">Please enter email.</p>';
-    }
-
-    // validate if password is empty
-    if (empty($password)) {
-        $error .= '<p class="error">Please enter your password.</p>';
+        $error .= "Please enter email.";
+    } elseif (empty($password)) {     // validate if password is empty
+        $error .= "Please enter your password.";
     }
 
     if (empty($error)) {
@@ -45,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         }
         $query->close();
     }
-    // Close connection
     mysqli_close($db);
 }
 ?>
@@ -54,27 +52,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+<div class="container-login">
+    <div class="login-window">
+        <span class="logo-welcome">Twitterity</span>
+        <div class="login-form">
             <h2>Login</h2>
-            <p>Please fill in your email and password.</p>
-            <?php echo $error; ?>
+            <?php if (!empty($error)) echo "<p style='color: red;'>$error</p>"; ?>
             <form action="" method="post">
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" name="email" class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="submit" class="btn btn-primary" value="Submit">
-                </div>
+                <label for="email">Email Address</label><br>
+                <input type="email" name="email" id="email" class="form-control"><br>
+
+                <label for="password">Password</label><br>
+                <input type="password" name="password" id="password" class="form-control"><br>
+
+                <input type="submit" name="submit" class="btn-login" value="Submit"><br>
                 <p>Don't have an account? <a href="register.php">Register here</a>.</p>
             </form>
         </div>

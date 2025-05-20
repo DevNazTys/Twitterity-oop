@@ -1,14 +1,12 @@
 <?php
 require_once "session.php";
 require_once "config.php";
-// Get all posts
-$user_id = $_SESSION["userid"];
-$query = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC";
-$stmt = $db->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$posts = $result->fetch_all(MYSQLI_ASSOC);
+
+// Getting all posts
+$query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id ORDER BY created_at DESC";
+$result = mysqli_query($db, $query);
+$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$userId = $_SESSION['userid'];
 
 function calculateTimeAgo($datetime) {
     $now = new DateTime();
@@ -37,7 +35,7 @@ function calculateTimeAgo($datetime) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Posts</title>
+    <title>All Posts</title>
     <link rel="stylesheet" href="css/style.css?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,6 +56,7 @@ function calculateTimeAgo($datetime) {
                     <a href="homepage.php"><i class="fa-regular fa-user"></i>My posts</a>
                     <a href="allPosts.php"><i class="fa-solid fa-globe"></i>All posts</a>
                 </nav>
+                <!--                <div class="crtpost" id="createPost"><a href="#">Create post</a href="#"></div>-->
                 <div class="crtpost" id="createPost"><button>Create post</button href="#"></div>
                 <span class="logout"><a href="logout.php">Logout</a></span>
             </div>
@@ -71,7 +70,7 @@ function calculateTimeAgo($datetime) {
             <div id="wcp" class="wcp">
                 <div class="wcpContent">
                     <span id="closeWcpBtn" class="close">&times;</span>
-                    <h1 style="margin: 5px; color: gold"><?php echo $_SESSION['name'];?></h1>
+                    <h1 style="margin: 5px"><?php echo $_SESSION['name'];?></h1>
                     <form action="create.php" method="post">
                         <textarea name="content" id="content" class="crtpostTxtArea" placeholder="Введіть текст..."></textarea>
                         <button type="submit" class="crtpostBtn">Create post</button>
@@ -79,35 +78,20 @@ function calculateTimeAgo($datetime) {
                 </div>
             </div>
 
-            <!-- modal window for editing posts -->
-            <div id="editPostModal" class="wep">
-                <div class="wepContent">
-                    <h1>Редагувати пост</h1>
-                    <textarea id="newContent" class="editPostTxtArea" placeholder="Введіть новий текст поста..."></textarea>
-                    <div class="wep-buttons">
-                        <button class="editPostBtn" id="saveButton">Зберегти</button>
-                        <button class="editPostBtn" id="cancelButton">Скасувати</button>
-                    </div>
-                </div>
-            </div>
-
-
             <!-- loading posts from the database -->
             <div class="postlist">
                 <?php if (!empty($posts)): ?>
                     <?php foreach ($posts as $post): ?>
                         <div class="vievpostitem" id="post-<?php echo $post['id']; ?>">
                             <div class="post-actions">
-                                <button class="btn-delete" onclick="deletePost(<?php echo $post['id']; ?>)"><i class="fa-solid fa-trash"></i></button>
-                                <button class="btn-edit" onclick="editPost(<?php echo $post['id']; ?>)"><i class="fa-solid fa-pen"></i></button>
                                 <?php $time_ago= calculateTimeAgo($post['created_at']); ?>
-                                <?php echo '@' . $_SESSION['name'] . ' &middot ' . '<small>' . $time_ago . '</small>' ?>
+                                <?php echo '@' . htmlspecialchars($post['name']) . ' &middot ' . '<small>' . $time_ago . '</small>' ?>
                                 <p><?php echo htmlspecialchars($post['content']); ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p class="no-posts">You have no posts yet</p>
+                    <p>Немає постів.</p>
                 <?php endif; ?>
             </div>
             <!---->

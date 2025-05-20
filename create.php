@@ -1,13 +1,6 @@
 <?php
-session_start();
-
+require_once 'session.php';
 require_once 'config.php';
-
-// Перевірка, чи користувач авторизований
-if (!isset($_SESSION['userid'])) {
-    echo json_encode(['error' => 'Користувач не авторизований']);
-    exit;
-}
 
 $content = trim($_POST['content'] ?? '');
 var_dump($content);
@@ -18,14 +11,13 @@ var_dump($content);
     $userId = $_SESSION['userid'];
 
     if (!empty($content)) {
-        // Вставка нового поста в базу даних
         $stmt = $db->prepare("INSERT INTO posts (user_id, content) VALUES (?, ?)");
         $stmt->bind_param("is", $userId, $content);
 
         if ($stmt->execute()) {
-            echo 'Пост успішно створено';
+            echo 'The post is successfully created';
         } else {
-            echo 'Помилка при створенні поста: ' . $stmt->error;
+            echo 'Error creating post: ' . $stmt->error;
         }
 
         $stmt->close();
@@ -33,4 +25,3 @@ var_dump($content);
     }
 
 header("Location: homepage.php");
-?>
