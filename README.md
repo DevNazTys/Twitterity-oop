@@ -132,6 +132,7 @@ The application uses clean URLs:
 - **Environment Configuration**: Flexible .env-based configuration
 - **Database Abstraction**: Works with both SQLite and MySQL
 - **Template System**: Clean separation of HTML and PHP logic
+- **Organized Assets**: Separate folders for CSS (`css/`) and JavaScript (`js/`) files
 
 ## Development
 

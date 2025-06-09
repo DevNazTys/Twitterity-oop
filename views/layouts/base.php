@@ -21,7 +21,7 @@
 <body>
     <?php echo $content; ?>
     <?php if (isset($includeScript) && $includeScript): ?>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     <?php endif; ?>
 </body>
 </html> 
