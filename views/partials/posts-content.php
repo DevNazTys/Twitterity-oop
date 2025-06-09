@@ -2,7 +2,7 @@
     <div class="aside-1">
         <div class="aside-1-1">
             <div class="header">
-                <span class="logo">Twitterity</span>
+                <a href="/dashboard" class="logo">Twitterity</a>
                 <nav class="navbar">
                     <a href="/dashboard"><i class="fa-regular fa-user"></i>My posts</a>
                     <a href="/posts"><i class="fa-solid fa-globe"></i>All posts</a>

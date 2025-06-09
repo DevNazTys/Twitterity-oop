@@ -1,6 +1,6 @@
 <div class="container-register">
     <div class="register-window">
-        <span class="logo-welcome">Twitterity</span>
+        <a href="/" class="logo-welcome">Twitterity</a>
         <div class="register-form">
             <h2>Register</h2>
             <?php if (!empty($error)) echo "<p style='color: red;'>$error</p>"; ?>

@@ -1,6 +1,6 @@
 <div class="container-login">
     <div class="login-window">
-        <span class="logo-welcome">Twitterity</span>
+        <a href="/" class="logo-welcome">Twitterity</a>
         <div class="login-form">
             <h2>Login</h2>
             <?php if (!empty($error)) echo "<p style='color: red;'>$error</p>"; ?>
