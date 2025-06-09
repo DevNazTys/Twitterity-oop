@@ -24,6 +24,7 @@ Router::get('/logout', 'PageController::logout');
 Router::post('/post/create', 'PostController::create');
 Router::post('/post/edit', 'PostController::edit');
 Router::get('/post/delete/{id}', 'PostController::delete');
+Router::get('/post/get/{id}', 'PostController::getPost');
 
 // Dispatch the route
 Router::dispatch();

@@ -25,11 +25,26 @@ function editPost(postId) {
     const EditModal = document.getElementById('editPostModal');
     const textarea = document.getElementById('newContent');
 
-    // Clearing the text field before opening
-    textarea.value = '';
-
-    // Showing a modal window
+    // Show loading state
+    textarea.value = 'Loading...';
     EditModal.style.display = 'flex';
+
+    // Fetch current post content
+    fetch('/post/get/' + postId)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                textarea.value = data.content;
+            } else {
+                textarea.value = '';
+                alert(data.error || 'Error loading post content');
+            }
+        })
+        .catch(error => {
+            textarea.value = '';
+            alert('Error loading post content');
+            console.error('Error:', error);
+        });
 }
 
 // "Save" button

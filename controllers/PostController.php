@@ -149,4 +149,35 @@ class PostController {
             echo json_encode(['error' => $result['message']]);
         }
     }
+
+    public static function getPost() {
+        Auth::requireLogin();
+        
+        // Extract post ID from URL path
+        $uri = $_SERVER['REQUEST_URI'];
+        $uriParts = explode('/', trim($uri, '/'));
+        $postId = intval(end($uriParts));
+
+        if (!$postId) {
+            echo json_encode(['error' => 'Invalid post ID']);
+            return;
+        }
+
+        $post = new Post($postId);
+        if (!$post->getId()) {
+            echo json_encode(['error' => 'Post not found']);
+            return;
+        }
+
+        // Check if current user owns the post
+        if ($post->getUserId() !== Auth::getCurrentUserId()) {
+            echo json_encode(['error' => 'Unauthorized']);
+            return;
+        }
+
+        echo json_encode([
+            'success' => true,
+            'content' => $post->getContent()
+        ]);
+    }
 } 
