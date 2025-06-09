@@ -90,6 +90,26 @@ This will show:
 - Database statistics (user and post counts)
 - Instructions for switching databases
 
+### Generating Test Data
+
+Use the data seeding script to generate dummy users and posts for testing:
+
+```bash
+php scripts/seed-data.php
+```
+
+This interactive script will:
+- Show current database statistics
+- Ask how many users to create (1-100)
+- Ask how many posts to create (1-500)
+- Generate realistic dummy data with:
+  - Random names from common first/last name combinations
+  - Realistic email addresses
+  - Varied post content (general and tech-focused)
+  - Progress feedback during generation
+
+All generated users have the password `password123` for easy testing.
+
 ## Installation & Setup
 
 1. Clone or download the application files
