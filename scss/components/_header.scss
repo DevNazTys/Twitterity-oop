@@ -1,0 +1,89 @@
+// =============================================================================
+// HEADER COMPONENT
+// =============================================================================
+
+@use 'sass:color';
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.aside-1-1 {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.header {
+  position: relative;
+  padding: $header-padding;
+}
+
+.logo {
+  font-family: $font-accent;
+  color: $primary-color;
+  text-transform: uppercase;
+  font-size: 25px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    color: color.adjust($primary-color, $lightness: 10%);
+  }
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 0;
+
+  a {
+    color: $text-light;
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 18px;
+
+    &:hover {
+      color: $primary-color;
+    }
+
+    i {
+      margin-right: 10px;
+    }
+  }
+}
+
+.crtpost {
+  padding: 20px 0;
+
+  button {
+    background-color: $primary-color;
+    color: $background-dark;
+    border: none;
+    padding: 10px 20px;
+    border-radius: $border-radius-lg;
+    cursor: pointer;
+    font-size: 16px;
+    transition: $transition-hover;
+
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: -10%);
+    }
+  }
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+
+  a {
+    color: $text-light;
+    text-decoration: none;
+    font-size: 16px;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+} 

@@ -1,0 +1,45 @@
+// =============================================================================
+// FORM COMPONENTS
+// =============================================================================
+
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Form controls
+.form-control {
+  @include form-control;
+}
+
+// Buttons
+.btn-register,
+.btn-login {
+  @include button-base;
+}
+
+.btn-edit,
+.btn-delete {
+  @include button-base;
+  padding: 5px 10px;
+  margin: 0 5px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: white;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+
+  &:hover {
+    background-color: #c82333;
+  }
+} 

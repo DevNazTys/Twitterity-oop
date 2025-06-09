@@ -1,0 +1,86 @@
+// =============================================================================
+// AUTHENTICATION PAGES
+// =============================================================================
+
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// Register page
+.container-register {
+  @include flex-center;
+  height: 100vh;
+  background-color: $background-dark;
+
+  .register-window {
+    padding: 10px;
+    width: $container-width;
+  }
+
+  .logo-welcome {
+    font-family: $font-logo;
+    color: $primary-color;
+    text-transform: uppercase;
+    font-size: $font-size-logo;
+    padding: 10px 10px;
+    text-align: center;
+  }
+
+  .register-form {
+    padding: $form-padding;
+    border: $primary-color solid 1px;
+    border-radius: $border-radius-md;
+    color: $text-light;
+    font-size: $font-size-xl;
+    font-family: $font-primary;
+    background: $secondary-color;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Login page
+.container-login {
+  @include flex-center;
+  height: 100vh;
+  background-color: $background-dark;
+
+  .login-window {
+    padding: 10px;
+    width: $container-width;
+  }
+
+  .logo-welcome {
+    font-family: $font-logo;
+    color: $primary-color;
+    text-transform: uppercase;
+    font-size: $font-size-logo;
+    padding: 10px 10px;
+    text-align: center;
+  }
+
+  .login-form {
+    padding: $form-padding;
+    border: $primary-color solid 1px;
+    border-radius: $border-radius-md;
+    color: $text-light;
+    font-size: $font-size-xl;
+    font-family: $font-primary;
+    background: $secondary-color;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+} 

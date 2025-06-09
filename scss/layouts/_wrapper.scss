@@ -1,0 +1,56 @@
+// =============================================================================
+// WRAPPER LAYOUT
+// =============================================================================
+
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100vh;
+
+  > * {
+    padding: 10px;
+    flex: 1;
+  }
+}
+
+.aside-1 {
+  background: $background-dark;
+}
+
+.main {
+  background: $secondary-color;
+  padding: 0;
+}
+
+.aside-2 {
+  background: $background-dark;
+}
+
+// Responsive layout
+@include respond-to(sm) {
+  .aside-1,
+  .aside-2 {
+    flex: 1 1 0;
+  }
+}
+
+@include respond-to(md) {
+  .main {
+    flex: 2 1 0;
+  }
+
+  .aside-1 {
+    order: 1;
+  }
+
+  .main {
+    order: 2;
+  }
+
+  .aside-2 {
+    order: 3;
+  }
+} 

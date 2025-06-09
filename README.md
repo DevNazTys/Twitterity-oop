@@ -81,7 +81,7 @@ To switch to MySQL:
 Run the test script to verify your database configuration:
 
 ```bash
-php test-db.php
+php scripts/test-db.php
 ```
 
 This will show:
@@ -133,6 +133,65 @@ The application uses clean URLs:
 - **Database Abstraction**: Works with both SQLite and MySQL
 - **Template System**: Clean separation of HTML and PHP logic
 - **Organized Assets**: Separate folders for CSS (`css/`) and JavaScript (`js/`) files
+- **SCSS Support**: Modular SCSS architecture with variables, mixins, and organized components
+
+## SCSS Development
+
+The application uses SCSS for maintainable and organized stylesheets:
+
+### SCSS Structure
+
+```
+scss/
+├── components/          # Reusable UI components
+│   ├── _forms.scss     # Form elements and buttons
+│   ├── _header.scss    # Header navigation and logo
+│   └── _posts.scss     # Post-related components
+├── layouts/            # Layout and base styles
+│   ├── _base.scss      # Base HTML/body styles
+│   └── _wrapper.scss   # Main layout wrapper
+├── pages/              # Page-specific styles
+│   └── _auth.scss      # Login and register pages
+├── utils/              # Utilities and helpers
+│   ├── _variables.scss # Colors, fonts, spacing
+│   ├── _mixins.scss    # Reusable mixins
+│   └── _fonts.scss     # Font definitions
+└── main.scss          # Main import file
+```
+
+### Compiling SCSS
+
+**Option 1: Using Sass CLI (Recommended)**
+```bash
+# Install Sass globally
+npm install -g sass
+
+# Compile once
+sass scss/main.scss css/style.css
+
+# Watch for changes during development
+sass --watch scss/main.scss css/style.css
+
+# Build for production (compressed)
+sass scss/main.scss css/style.css --style compressed
+```
+
+**Option 2: Using npm scripts**
+```bash
+# Install dependencies
+npm install
+
+# Available scripts
+npm run scss          # Compile once
+npm run scss:watch    # Watch for changes
+npm run scss:build    # Build for production (compressed)
+```
+
+**Option 3: PHP compilation helper**
+```bash
+# View compilation instructions and SCSS structure
+php scripts/compile-scss.php
+```
 
 ## Development
 
@@ -143,4 +202,5 @@ The application follows modern PHP development practices:
 - Clean URL routing
 - Environment-based configuration
 - Template-based views
-- AJAX functionality for dynamic features 
+- AJAX functionality for dynamic features
+- Modular SCSS architecture with variables and mixins 

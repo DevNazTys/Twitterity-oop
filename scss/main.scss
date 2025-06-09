@@ -1,0 +1,21 @@
+// =============================================================================
+// MAIN SCSS FILE
+// =============================================================================
+// This file imports all the SCSS partials and compiles them into CSS
+
+// Utilities (must be imported first)
+@use 'utils/variables' as *;
+@use 'utils/mixins' as *;
+@use 'utils/fonts';
+
+// Base & Layout
+@use 'layouts/base';
+@use 'layouts/wrapper';
+
+// Components
+@use 'components/forms';
+@use 'components/header';
+@use 'components/posts';
+
+// Pages
+@use 'pages/auth'; 

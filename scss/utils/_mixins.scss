@@ -1,0 +1,97 @@
+// =============================================================================
+// MIXINS
+// =============================================================================
+
+@use 'variables' as *;
+
+// Center content flexbox
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Button base styles
+@mixin button-base {
+  font-size: $font-size-xl;
+  padding: 10px;
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+  transition: $transition-hover;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+// Form control styles
+@mixin form-control {
+  display: block;
+  width: 95%;
+  height: calc(1.5em + #{$spacing-md} + 2px);
+  padding: #{$spacing-sm} #{$spacing-md};
+  font-size: $font-size-base;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text-dark;
+  background-color: $text-light;
+  background-clip: padding-box;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  transition: border-color $transition-base, box-shadow $transition-base;
+}
+
+// Auth window styles
+@mixin auth-window($prefix) {
+  @include flex-center;
+  height: 100vh;
+  background-color: $background-dark;
+
+  .#{$prefix}-window {
+    padding: 10px;
+    width: $container-width;
+  }
+
+  .logo-welcome {
+    font-family: $font-logo;
+    color: $primary-color;
+    text-transform: uppercase;
+    font-size: $font-size-logo;
+    padding: 10px 10px;
+    text-align: center;
+  }
+
+  .#{$prefix}-form {
+    padding: $form-padding;
+    border: $primary-color solid 1px;
+    border-radius: $border-radius-md;
+    color: $text-light;
+    font-size: $font-size-xl;
+    font-family: $font-primary;
+    background: $secondary-color;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive breakpoints
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: #{$breakpoint-sm}) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == md {
+    @media (min-width: #{$breakpoint-md}) {
+      @content;
+    }
+  }
+} 
