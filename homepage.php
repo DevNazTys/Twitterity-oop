@@ -5,10 +5,8 @@ require_once "config.php";
 $user_id = $_SESSION["userid"];
 $query = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC";
 $stmt = $db->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$posts = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->execute([$user_id]);
+$posts = $stmt->fetchAll();
 
 function calculateTimeAgo($datetime) {
     $now = new DateTime();

@@ -3,9 +3,10 @@ require_once "session.php";
 require_once "config.php";
 
 // Getting all posts
-$query = "SELECT * FROM posts JOIN users ON posts.user_id = users.id ORDER BY created_at DESC";
-$result = mysqli_query($db, $query);
-$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$query = "SELECT posts.*, users.name, users.email FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC";
+$stmt = $db->prepare($query);
+$stmt->execute();
+$posts = $stmt->fetchAll();
 $userId = $_SESSION['userid'];
 
 function calculateTimeAgo($datetime) {

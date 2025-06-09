@@ -20,31 +20,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     }
 
     if (empty($error)) {
-        if($query = $db->prepare("SELECT * FROM users WHERE email = ?")) {
-            $query->bind_param('s', $email);
-            $query->execute();
-            $result = $query->get_result();
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-            }
-            if ($row) {
-                if (password_verify($password, $row['password'])) {
-                    $_SESSION["userid"] = $row['id'];
-                    $_SESSION["name"] = $row['name'];
+        $query = $db->prepare("SELECT * FROM users WHERE email = ?");
+        $query->execute([$email]);
+        $row = $query->fetch();
+        
+        if ($row) {
+            if (password_verify($password, $row['password'])) {
+                $_SESSION["userid"] = $row['id'];
+                $_SESSION["name"] = $row['name'];
 
-                    // Redirect the user to welcome page
-                    header("location: homepage.php");
-                    exit;
-                } else {
-                    $error .= '<p class="error">The password is not valid.</p>';
-                }
+                // Redirect the user to welcome page
+                header("location: homepage.php");
+                exit;
             } else {
-                $error .= '<p class="error">No User exist with that email address.</p>';
+                $error .= '<p class="error">The password is not valid.</p>';
             }
+        } else {
+            $error .= '<p class="error">No User exist with that email address.</p>';
         }
-        $query->close();
     }
-    mysqli_close($db);
 }
 ?>
 <!DOCTYPE html>

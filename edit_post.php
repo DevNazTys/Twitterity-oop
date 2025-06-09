@@ -11,15 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $query = "UPDATE posts SET content = ? WHERE id = ?";
     $stmt = $db->prepare($query);
-    $stmt->bind_param("si", $new_content, $post_id);
 
-    if ($stmt->execute()) {
+    if ($stmt->execute([$new_content, $post_id])) {
         echo json_encode(['message' => 'Post updated']);
     } else {
         echo json_encode(['error' => 'Database error']);
     }
-
-    $stmt->close();
 } else {
     echo json_encode(['error' => 'Invalid query method']);
 }

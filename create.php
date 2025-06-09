@@ -12,16 +12,12 @@ var_dump($content);
 
     if (!empty($content)) {
         $stmt = $db->prepare("INSERT INTO posts (user_id, content) VALUES (?, ?)");
-        $stmt->bind_param("is", $userId, $content);
-
-        if ($stmt->execute()) {
+        
+        if ($stmt->execute([$userId, $content])) {
             echo 'The post is successfully created';
         } else {
-            echo 'Error creating post: ' . $stmt->error;
+            echo 'Error creating post';
         }
-
-        $stmt->close();
-        $db->close();
     }
 
 header("Location: homepage.php");

@@ -27,15 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else { // Перевірка на існування користувача
         $check_db = "SELECT id FROM users WHERE email = ?";
         $check_query = $db->prepare($check_db); //підготовлюємо запит до БД ($bd) для пошуку користувачів з певним email
-        if ($check_query) { //якщо підготовка успішна, то виконуємо пошук
-            $check_query->bind_param("s", $email); // вставляємо значення email до підготовленого запиту
-            $check_query->execute(); //виконуємо пошук id з вказаним email; метод "execute" виконує запит
-            $check_result = $check_query->get_result(); //повертаємо результат виконання запиту.
-        }
-        if ($check_result->num_rows > 0) { //num_rows рахує кількість знайдених даних. Нічого не знайшов = повертає 0
+        $check_query->execute([$email]); //виконуємо пошук id з вказаним email
+        $check_result = $check_query->fetch(); //повертаємо результат виконання запиту.
+        
+        if ($check_result) { //якщо знайшлись дані, то користувач існує
             $error = "Користувач з такою електронною поштою вже існує.";
         }
-        $check_query->close();
     }
 
     if (empty($error)) {
@@ -46,21 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
         $query = $db->prepare($sql);
 
-        if ($query) {
-            // Прив'язка параметрів
-            $query->bind_param("sss", $name, $email, $password_hash);
+        try {
             // Виконання запиту
-            if ($query->execute()) {
+            if ($query->execute([$name, $email, $password_hash])) {
                 $result= "Ви успішно зареєстровані!";
             } else {
-                $result= "Помилка реєстрації: " . $query->error;
+                $result= "Помилка реєстрації";
             }
-            // Закриття query
-            $query->close();
-        } else {
-            $result= "Помилка підготовки запиту: " . $db->error;
+        } catch (PDOException $e) {
+            $result= "Помилка підготовки запиту: " . $e->getMessage();
         }
-        $db->close();
     }
 }
 ?>
