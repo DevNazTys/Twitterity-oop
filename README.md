@@ -32,7 +32,7 @@ Then edit the `.env` file in the root directory:
 DB_TYPE=sqlite
 
 # SQLite Configuration (used when DB_TYPE=sqlite)
-DB_SQLITE_PATH=database.sqlite
+DB_SQLITE_PATH=databases/database.sqlite
 
 # MySQL Configuration (used when DB_TYPE=mysql)
 DB_MYSQL_HOST=localhost
@@ -53,7 +53,7 @@ APP_DEBUG=true
 SQLite is the default database and requires no additional setup:
 
 1. Set `DB_TYPE=sqlite` in `.env`
-2. Ensure the SQLite file path is correct: `DB_SQLITE_PATH=database.sqlite`
+2. Ensure the SQLite file path is correct: `DB_SQLITE_PATH=databases/database.sqlite`
 3. The application will automatically create the database file and tables
 
 ### Using MySQL
@@ -134,6 +134,7 @@ The application uses clean URLs:
 - **Template System**: Clean separation of HTML and PHP logic
 - **Organized Assets**: Separate folders for CSS (`css/`) and JavaScript (`js/`) files
 - **SCSS Support**: Modular SCSS architecture with variables, mixins, and organized components
+- **Database Organization**: Dedicated `databases/` folder for database files
 
 ## SCSS Development
 

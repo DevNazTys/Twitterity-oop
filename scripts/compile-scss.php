@@ -8,8 +8,8 @@
 echo "=== SCSS Compilation Script ===\n";
 
 // Check if required directories exist
-$scssDir = __DIR__ . '/scss';
-$cssDir = __DIR__ . '/css';
+$scssDir = __DIR__ . '/../scss';
+$cssDir = __DIR__ . '/../css';
 
 if (!is_dir($scssDir)) {
     echo "❌ SCSS directory not found: $scssDir\n";

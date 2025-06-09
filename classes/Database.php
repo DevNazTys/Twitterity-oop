@@ -35,7 +35,7 @@ class Database {
             ];
         } else {
             $this->config = [
-                'path' => Environment::get('DB_SQLITE_PATH', 'database.sqlite')
+                'path' => Environment::get('DB_SQLITE_PATH', 'databases/database.sqlite')
             ];
         }
     }

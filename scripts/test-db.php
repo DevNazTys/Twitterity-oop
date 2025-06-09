@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/classes/Environment.php';
-require_once __DIR__ . '/classes/Config.php';
-require_once __DIR__ . '/classes/Database.php';
+require_once __DIR__ . '/../classes/Environment.php';
+require_once __DIR__ . '/../classes/Config.php';
+require_once __DIR__ . '/../classes/Database.php';
 
 echo "=== Database Configuration Test ===\n\n";
 
@@ -63,8 +63,9 @@ echo "1. Update .env file: DB_TYPE=sqlite\n";
 echo "2. Make sure SQLite database file exists\n\n";
 
 echo "Current .env file content:\n";
-if (file_exists('.env')) {
-    echo file_get_contents('.env');
+$envPath = __DIR__ . '/../.env';
+if (file_exists($envPath)) {
+    echo file_get_contents($envPath);
 } else {
     echo "No .env file found!\n";
 }

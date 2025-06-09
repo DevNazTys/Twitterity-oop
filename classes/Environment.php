@@ -46,7 +46,7 @@ class Environment {
     private static function setDefaults() {
         self::$env = [
             'DB_TYPE' => 'sqlite',
-            'DB_SQLITE_PATH' => 'database.sqlite',
+            'DB_SQLITE_PATH' => 'databases/database.sqlite',
             'DB_MYSQL_HOST' => 'localhost',
             'DB_MYSQL_PORT' => '3306',
             'DB_MYSQL_DATABASE' => 'twitterity',
