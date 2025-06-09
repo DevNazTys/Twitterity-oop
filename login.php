@@ -1,44 +1,16 @@
 <?php
-session_start();
-require_once "config.php";
-if (isset($_SESSION["userid"]) && $_SESSION["userid"] === true) {
-    header("location: homepage.php");
-    exit;
-}
+require_once "controllers/UserController.php";
+require_once "classes/Auth.php";
+
+// Redirect if already logged in
+Auth::redirectIfLoggedIn();
 
 $error = '';
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    // validate if email is empty
-    if (empty($email)) {
-        $error .= "Please enter email.";
-    } elseif (empty($password)) {     // validate if password is empty
-        $error .= "Please enter your password.";
-    }
-
-    if (empty($error)) {
-        $query = $db->prepare("SELECT * FROM users WHERE email = ?");
-        $query->execute([$email]);
-        $row = $query->fetch();
-        
-        if ($row) {
-            if (password_verify($password, $row['password'])) {
-                $_SESSION["userid"] = $row['id'];
-                $_SESSION["name"] = $row['name'];
-
-                // Redirect the user to welcome page
-                header("location: homepage.php");
-                exit;
-            } else {
-                $error .= '<p class="error">The password is not valid.</p>';
-            }
-        } else {
-            $error .= '<p class="error">No User exist with that email address.</p>';
-        }
-    }
+// Handle login
+$loginResult = UserController::handleLogin();
+if ($loginResult !== null && !$loginResult['success']) {
+    $error = $loginResult['message'];
 }
 ?>
 <!DOCTYPE html>

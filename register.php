@@ -1,58 +1,20 @@
 <?php
-session_start();
-require_once "config.php";
-if (isset($_SESSION["userid"]) && $_SESSION["userid"] === true) {
-    header("location: homepage.php");
-    exit;
-}
+require_once "controllers/UserController.php";
+require_once "classes/Auth.php";
 
-$error='';
+// Redirect if already logged in
+Auth::redirectIfLoggedIn();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$error = '';
+$result = '';
 
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-    $confirm_password = trim($_POST["confirm_password"]);
-
-    // Data validation
-    if (empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
-        $error = "Будь ласка, заповніть всі поля.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) { //FILTER_VALIDATE_EMAIL - вбудований фільтр в php
-        $error = "Некоректний формат електронної пошти.";
-    } elseif ($password !== $confirm_password) {
-        $error = "Паролі не співпадають.";
-    } elseif (strlen($password) < 8) {
-        $error = "Пароль має бути не менше 8 символів.";
-    } else { // Перевірка на існування користувача
-        $check_db = "SELECT id FROM users WHERE email = ?";
-        $check_query = $db->prepare($check_db); //підготовлюємо запит до БД ($bd) для пошуку користувачів з певним email
-        $check_query->execute([$email]); //виконуємо пошук id з вказаним email
-        $check_result = $check_query->fetch(); //повертаємо результат виконання запиту.
-        
-        if ($check_result) { //якщо знайшлись дані, то користувач існує
-            $error = "Користувач з такою електронною поштою вже існує.";
-        }
-    }
-
-    if (empty($error)) {
-
-        $password_hash = password_hash($password, PASSWORD_BCRYPT); // Хешування паролю
-
-        // SQL-запит для додавання нового користувача
-        $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        $query = $db->prepare($sql);
-
-        try {
-            // Виконання запиту
-            if ($query->execute([$name, $email, $password_hash])) {
-                $result= "Ви успішно зареєстровані!";
-            } else {
-                $result= "Помилка реєстрації";
-            }
-        } catch (PDOException $e) {
-            $result= "Помилка підготовки запиту: " . $e->getMessage();
-        }
+// Handle registration
+$registrationResult = UserController::handleRegistration();
+if ($registrationResult !== null) {
+    if ($registrationResult['success']) {
+        $result = $registrationResult['message'];
+    } else {
+        $error = $registrationResult['message'];
     }
 }
 ?>

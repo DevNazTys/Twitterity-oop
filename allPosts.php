@@ -1,32 +1,14 @@
 <?php
-require_once "session.php";
-require_once "config.php";
+require_once "controllers/PostController.php";
+require_once "classes/Auth.php";
+require_once "classes/Post.php";
+
+// Require login
+Auth::requireLogin();
 
 // Getting all posts
-$query = "SELECT posts.*, users.name, users.email FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC";
-$stmt = $db->prepare($query);
-$stmt->execute();
-$posts = $stmt->fetchAll();
-$userId = $_SESSION['userid'];
-
-function calculateTimeAgo($datetime) {
-    $now = new DateTime();
-    $created_at = new DateTime($datetime);
-    $diff = $now->diff($created_at);
-    if ($diff->y > 0) {
-        return $diff->y . ' years ago';
-    } elseif ($diff->m > 0) {
-        return $diff->m . ' months ago';
-    } elseif ($diff->d > 0) {
-        return $diff->d . ' days ago';
-    } elseif ($diff->h > 0) {
-        return $diff->h . ' hours ago';
-    } elseif ($diff->i > 0) {
-        return $diff->i . ' minutes ago';
-    } elseif ($diff->s > 0) {
-        return $diff->s . ' seconds ago';
-    }
-}
+$posts = PostController::getAllPosts();
+$userId = Auth::getCurrentUserId();
 ?>
 
 <!doctype html>
@@ -64,14 +46,14 @@ function calculateTimeAgo($datetime) {
         </div>
     </div>
     <div class="main">
-        <div class="welcome"><?php echo $_SESSION['name'];?></div>
+        <div class="welcome"><?php echo Auth::getCurrentUserName();?></div>
 
         <div class="vievpost">
             <!-- modal window for creating posts -->
             <div id="wcp" class="wcp">
                 <div class="wcpContent">
                     <span id="closeWcpBtn" class="close">&times;</span>
-                    <h1 style="margin: 5px"><?php echo $_SESSION['name'];?></h1>
+                    <h1 style="margin: 5px"><?php echo Auth::getCurrentUserName();?></h1>
                     <form action="create.php" method="post">
                         <textarea name="content" id="content" class="crtpostTxtArea" placeholder="Введіть текст..."></textarea>
                         <button type="submit" class="crtpostBtn">Create post</button>
@@ -85,7 +67,7 @@ function calculateTimeAgo($datetime) {
                     <?php foreach ($posts as $post): ?>
                         <div class="vievpostitem" id="post-<?php echo $post['id']; ?>">
                             <div class="post-actions">
-                                <?php $time_ago= calculateTimeAgo($post['created_at']); ?>
+                                <?php $time_ago = Post::calculateTimeAgo($post['created_at']); ?>
                                 <?php echo '@' . htmlspecialchars($post['name']) . ' &middot ' . '<small>' . $time_ago . '</small>' ?>
                                 <p><?php echo htmlspecialchars($post['content']); ?></p>
                             </div>

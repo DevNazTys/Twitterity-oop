@@ -1,7 +1,7 @@
 <?php
-session_start();
+require_once "classes/Auth.php";
 
-if (isset($_SESSION["userid"])) {
+if (Auth::isLoggedIn()) {
     header("location: homepage.php");
     exit;
 } else {

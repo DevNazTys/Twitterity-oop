@@ -1,7 +1,4 @@
 <?php
-session_start();
+require_once "controllers/UserController.php";
 
-if (session_destroy()) {
-    header("Location: login.php");
-    exit;
-}
+UserController::logout();
