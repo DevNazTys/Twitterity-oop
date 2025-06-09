@@ -39,7 +39,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
     const newContent = textarea.value.trim();
 
     if (newContent !== "") {
-        fetch('edit_post.php', {
+        fetch('/post/edit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -69,12 +69,8 @@ document.getElementById('cancelButton').addEventListener('click', () => {
 });
 
 function deletePost(postId) {
-    fetch('delete_post.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `post_id=${postId}`
+    fetch('/post/delete/' + postId, {
+        method: 'GET'
     })
         .then(response => response.json())
         .then(data => {

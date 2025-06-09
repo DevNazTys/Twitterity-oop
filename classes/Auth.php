@@ -52,12 +52,12 @@ class Auth {
 
     public static function requireLogin() {
         if (!self::isLoggedIn()) {
-            header("Location: login.php");
+            header("Location: /login");
             exit;
         }
     }
 
-    public static function redirectIfLoggedIn($redirectTo = 'homepage.php') {
+    public static function redirectIfLoggedIn($redirectTo = '/dashboard') {
         if (self::isLoggedIn()) {
             header("Location: $redirectTo");
             exit;

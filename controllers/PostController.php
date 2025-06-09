@@ -9,7 +9,7 @@ class PostController {
         Auth::requireLogin();
         
         if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-            header("Location: homepage.php");
+            header("Location: /dashboard");
             exit;
         }
 
@@ -27,7 +27,7 @@ class PostController {
             }
         }
 
-        header("Location: homepage.php");
+        header("Location: /dashboard");
         exit;
     }
 
@@ -105,5 +105,48 @@ class PostController {
 
     public static function getAllPosts() {
         return Post::getAllPostsWithUsers();
+    }
+
+    // New methods for clean URL routing
+    public static function create() {
+        self::createPost();
+    }
+
+    public static function edit() {
+        self::editPost();
+    }
+
+    public static function delete() {
+        Auth::requireLogin();
+        
+        // Extract post ID from URL path
+        $uri = $_SERVER['REQUEST_URI'];
+        $uriParts = explode('/', trim($uri, '/'));
+        $postId = intval(end($uriParts));
+
+        if (!$postId) {
+            echo json_encode(['error' => 'Invalid post ID']);
+            return;
+        }
+
+        $post = new Post($postId);
+        if (!$post->getId()) {
+            echo json_encode(['error' => 'Post not found']);
+            return;
+        }
+
+        // Check if current user owns the post
+        if ($post->getUserId() !== Auth::getCurrentUserId()) {
+            echo json_encode(['error' => 'Unauthorized']);
+            return;
+        }
+
+        $result = $post->delete();
+        
+        if ($result['success']) {
+            echo json_encode(['message' => 'Post deleted']);
+        } else {
+            echo json_encode(['error' => $result['message']]);
+        }
     }
 } 

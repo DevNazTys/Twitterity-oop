@@ -44,7 +44,7 @@ class UserController {
         
         if ($result['success']) {
             Auth::login($result['user']);
-            header("Location: homepage.php");
+            header("Location: /dashboard");
             exit;
         }
         
@@ -53,7 +53,7 @@ class UserController {
 
     public static function logout() {
         Auth::logout();
-        header("Location: login.php");
+        header("Location: /login");
         exit;
     }
 } 

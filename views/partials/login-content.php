@@ -12,7 +12,7 @@
                 <input type="password" name="password" id="password" class="form-control"><br>
 
                 <input type="submit" name="submit" class="btn-login" value="Submit"><br>
-                <p>Don't have an account? <a href="register.php">Register here</a>.</p>
+                <p>Don't have an account? <a href="/register">Register here</a>.</p>
             </form>
         </div>
     </div>
