@@ -112,6 +112,8 @@ All generated users have the password `password123` for easy testing.
 
 ## Installation & Setup
 
+### Option 1: Standard PHP Development Server
+
 1. Clone or download the application files
 2. Copy the environment configuration:
    ```bash
@@ -123,6 +125,64 @@ All generated users have the password `password123` for easy testing.
    php -S localhost:8000
    ```
 5. Visit `http://localhost:8000` in your browser
+
+### Option 2: Using DDEV (Recommended for Development)
+
+[DDEV](https://ddev.readthedocs.io/) provides a consistent Docker-based development environment:
+
+1. **Install DDEV** following the [official installation guide](https://ddev.readthedocs.io/en/stable/#installation)
+
+2. **Initialize DDEV in your project:**
+   ```bash
+   ddev config --project-type=php --php-version=8.1
+   ```
+
+3. **Copy the environment configuration:**
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Configure for DDEV (update `.env`):**
+   ```env
+   # Use MySQL with DDEV
+   DB_TYPE=mysql
+   DB_MYSQL_HOST=db
+   DB_MYSQL_PORT=3306
+   DB_MYSQL_DATABASE=db
+   DB_MYSQL_USERNAME=db
+   DB_MYSQL_PASSWORD=db
+   DB_MYSQL_CHARSET=utf8mb4
+   ```
+
+5. **Start DDEV:**
+   ```bash
+   ddev start
+   ```
+
+6. **Create database tables:**
+   ```bash
+   ddev exec php scripts/test-db.php
+   ```
+
+7. **Generate test data (optional):**
+   ```bash
+   ddev exec php scripts/seed-data.php
+   ```
+
+8. **Access your application:**
+   - Web: `https://twitterity.ddev.site` (or your project name)
+   - Database: Use `ddev describe` to see database connection details
+
+**DDEV Useful Commands:**
+```bash
+ddev start          # Start the environment
+ddev stop           # Stop the environment
+ddev restart        # Restart services
+ddev ssh            # SSH into web container
+ddev mysql          # Access MySQL CLI
+ddev describe       # Show project details and URLs
+ddev logs           # View container logs
+```
 
 ## URL Structure
 

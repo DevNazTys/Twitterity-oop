@@ -11,7 +11,7 @@
 <body>
 <div class="container-register">
     <div class="register-window">
-        <span class="logo-welcome">Twitterity</span>
+        <a href="/" class="logo-welcome">Twitterity</a>
         <div class="register-form">
             <h2>Register</h2>
             <?php if (!empty($error)) echo "<p style='color: red;'>$error</p>"; ?>
@@ -30,7 +30,7 @@
                 <input type="password" name="confirm_password" id="confirm_password" class="form-control"><br>
 
                 <input type="submit" value="Submit" class="btn-register"><br>
-                <p>Already have an account? <a href="login.php">Login here</a></p>
+                <p>Already have an account? <a href="/login">Login here</a></p>
             </form>
         </div>
     </div>

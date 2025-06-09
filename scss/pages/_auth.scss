@@ -23,6 +23,12 @@
     font-size: $font-size-logo;
     padding: 10px 10px;
     text-align: center;
+    text-decoration: none;
+    display: block;
+    
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   .register-form {
@@ -63,6 +69,12 @@
     font-size: $font-size-logo;
     padding: 10px 10px;
     text-align: center;
+    text-decoration: none;
+    display: block;
+    
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   .login-form {
