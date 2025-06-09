@@ -2,6 +2,7 @@
 session_start();
 
 // Load required classes
+require_once __DIR__ . '/classes/Environment.php';
 require_once __DIR__ . '/classes/Database.php';
 require_once __DIR__ . '/classes/User.php';
 require_once __DIR__ . '/classes/Post.php';
