@@ -46,10 +46,10 @@
                     <?php foreach ($posts as $post): ?>
                         <div class="vievpostitem" id="post-<?php echo $post['id']; ?>">
                             <div class="post-actions">
-                                <button class="btn-delete" onclick="deletePost(<?php echo $post['id']; ?>)"><i class="fa-solid fa-trash"></i></button>
-                                <button class="btn-edit" onclick="editPost(<?php echo $post['id']; ?>)"><i class="fa-solid fa-pen"></i></button>
                                 <?php $time_ago = Post::calculateTimeAgo($post['created_at']); ?>
                                 <?php echo '@' . Auth::getCurrentUserName() . ' &middot ' . '<small>' . $time_ago . '</small>' ?>
+                                <button class="btn-delete" onclick="deletePost(<?php echo $post['id']; ?>)"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn-edit" onclick="editPost(<?php echo $post['id']; ?>)"><i class="fa-solid fa-pen"></i></button>
                                 <p><?php echo htmlspecialchars($post['content']); ?></p>
                             </div>
                         </div>
